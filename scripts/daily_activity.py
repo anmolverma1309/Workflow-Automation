@@ -4,13 +4,27 @@ import subprocess
 from datetime import datetime, timedelta, timezone
 
 
+QUOTES = [
+    "Small steps every day lead to big results.",
+    "Discipline is choosing what you want most over what you want now.",
+    "Progress, not perfection.",
+    "Consistency turns effort into achievement.",
+    "Focus on the process and the results will follow.",
+    "Great things are built one commit at a time.",
+    "Momentum is created by showing up daily.",
+    "Keep going. You are closer than you think.",
+    "Work quietly and let the results make noise.",
+    "Done today is better than perfect someday.",
+]
+
+
 def run(cmd, env=None):
     subprocess.run(cmd, check=True, env=env)
 
 
 def main():
-    min_commits = int(os.environ.get("MIN_COMMITS", "4"))
-    max_commits = int(os.environ.get("MAX_COMMITS", "10"))
+    min_commits = int(os.environ.get("MIN_COMMITS", "1"))
+    max_commits = int(os.environ.get("MAX_COMMITS", "3"))
     max_commits = max(1, min(20, max_commits))
     min_commits = max(1, min(min_commits, max_commits))
 
@@ -28,9 +42,11 @@ def main():
 
     readme_path = os.path.join(os.getcwd(), "README.md")
     for dt in times:
-        message = dt.strftime("Contribution: %Y-%m-%d %H:%M")
+        quote = random.choice(QUOTES)
+        message = f"Quote update: {quote[:50]}"
+        readme_line = f"{dt.strftime('%Y-%m-%d %H:%M')} - \"{quote}\""
         with open(readme_path, "a", encoding="utf-8") as handle:
-            handle.write(message + "\n\n")
+            handle.write(readme_line + "\n")
         run(["git", "add", "README.md"])
         env = os.environ.copy()
         env["GIT_AUTHOR_DATE"] = dt.isoformat()
