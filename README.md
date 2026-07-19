@@ -266,3 +266,4 @@ Contribution: 2026-07-03 18:03
 2026-07-19 13:01 - "Momentum is created by showing up daily."
 2026-07-19 14:34 - "Done today is better than perfect someday."
 2026-07-19 15:35 - "Momentum is created by showing up daily."
+2026-07-19 17:51 - "Discipline is choosing what you want most over what you want now."
